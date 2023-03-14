@@ -1,0 +1,59 @@
+stack #= 11
+public ip address = 10.50.32.237
+
+
+xfreerdp /u:andy.dwyer /v:10.50.32.237 +dynamic-resoluton +glyph-cache +clipboard
+
+
+
+
+
+
+Powershell, Profiles, and Remoting
+    Powershell
+        verb-noun
+        get-help <cmdlet>
+        
+        get-location    #You need to know where youre at for certain commands to work
+            pwd
+            gl
+            
+        get-host | select-object version
+            #shows the current running version of the OS
+        
+        get-command
+            #shows all commands
+            
+        get-member
+            
+            
+        get-process | get-member
+            shows all the different things you can do to "get-process"
+            methods- things you can do to the object
+            properties - things about the object
+        get-process | get-member | where-object {$_.membertype -match "Method"}
+            #shows members where the type is a method
+            #You can only use dot notation and pipe variables with whatever properties were returned from the last command
+            
+        pipeline variables, $_
+            #the output of the commands that take place prior to whatever youre trying to do
+            
+        CIM Classes
+            #objects designed to control a specific windows subsystem like the Hard drive, or BIOS
+            get-CIMclass * #Lists all CIM clases
+            Get-CimInstance -ClassName Win32_LogicalDisk -Filter “DriveType=3” | gm      #Shows properties and methods for this instance
+        
+        -erroraction silentlycontinue            #silently continues a program and removes error messages
+        
+        get-executionpolicy -list
+        set-executionpolicy
+            
+    Profiles
+        How you set your personal configuration and customizations
+        
+        Test-path -path $profile.AllUsersCurrentHost
+        Test-path -path $profile.AllUsersAllHost
+        Test-path -path $profile.CurrentUsersCurrentHost
+        Test-path -path $profile.CurrentUsersAllHost
+        
+        ******IS a form of persistence for Adversary, CHECK FOR BACKDOORS
