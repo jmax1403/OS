@@ -7,7 +7,17 @@ Registry
         reg query
         reg compare
         
-        
+get-childitem 'REGISTRY::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\'
+    Gets a list of all accounts that have connected to the device
+
+get-childitem 'REGISTRY::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles'    
+    Gets a list of all networks the device has connected to
+
+
+
+
+
+
         
     HKEY_USERS
         Contains SID (Security IDentifier) for every user
@@ -79,6 +89,9 @@ Alternate Data Streams
     
     cat .\coffee.txt -stream secret.info
         displays the data from data stream secret.info
+        
+     Get-ChildItem -recurse | % {gi $_.FullName -stream *} | Where-Object stream -ne ':$DATA'
+        searches everything in the current directory for a stream not including :$DATA
         
         
         
