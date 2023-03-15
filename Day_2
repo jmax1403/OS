@@ -1,0 +1,96 @@
+Registry
+    regedit.exe
+        GUI
+        Located at C:\Windows\regedit.exe
+    reg.exe (command prompt)
+        CLI
+        reg query
+        reg compare
+        
+        
+        
+    HKEY_USERS
+        Contains SID (Security IDentifier) for every user
+        
+    HKEY_LOCAL_MACHINE
+        Contains Machine settings and user settings that will open on startup
+    
+    HKEY_CURRENT_USER
+        Contains the currently logged in users information
+        
+    HKEY_CLASSES_ROOT
+        Symoblic link to HKEY_LOCAL_MACHINE\Software\Classes
+        
+        
+    get-item (instead of gci)
+        to get items from the deepest directory in registry
+        
+        
+    Registry locations that can be used for persistence
+        HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+
+        HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+        HKU\<SID>\Software\Microsoft\Windows\CurrentVersion\Run
+
+        HKU\<SID>\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+        HKLM\SYSTEM\CurrentControlSet\services
+
+        HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+
+        HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+
+        HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+        
+        
+    ACL
+        Access Control List (ACL) that describes which user groups or individual users are granted or denied access permissions.
+        ACL is made up of ACE (Access Control Entries) which can be explicit or inherited from a parent object.
+        Each ACL identifies a user and specifies what they are and are not allowed to do on the system.
+        
+        
+    get-psdrive
+        A Windows PowerShell drive is a data store location that you can access like a file system drive in Windows PowerShell.
+        
+        gci HKCU:
+            shows the Current user Hive Key
+        
+    New-PSDrive -Name <name> -PSProvider FileSystem -Root <path>
+            Add to a profile to establish persistence and maintain after closing PS
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Alternate Data Streams
+    coffee.png--------image         $DATA
+                \_____thumbnail
+                 \_____malicious.exe
+                  \_____outfile.exe
+   
+   
+   Syntax for ADS
+        [filename.extension]:[alternate_stream_name]:$DATA
+        
+    Set-Content .\reminder.txt -Value "social security numbers" -Stream secret.info
+        sets an alternate data stream containing "SSN" for item reminder.txt and names the stream secret.info
+    
+    Get-Item .\coffee.txt -Stream *
+        gets all data streams for item coffee.txt
+    
+    cat .\coffee.txt -stream secret.info
+        displays the data from data stream secret.info
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
