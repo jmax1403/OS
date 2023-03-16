@@ -1,0 +1,28 @@
+Linux / Bash
+    ssh -J andy.dwyer@10.50.32.237 garviel@10.11.0.6
+        "-J" is used to 'jump' from admin device to the next device
+    
+    man -k <keyword>
+        used to search for commands by a keyword
+    $ is not needed to define a variable in BASH
+        
+    for command substitution you must use echo to display the results of the command
+        ex.
+            x=$(ls -lisa)
+            echo $x
+        
+    ls -lisa format  
+        25 76 -rwxr-xr-x 1 root root 76000 Jan 18  2018 /bin/dd
+            "-rwx" = filetype,read,write,execute
+            "rwx r-x r-x", = User Owner, Group, Other
+            "root root" = root user and root group
+
+            Can't read the file = dont have read permissions
+            Can't Write to the file = Dont have write permissions
+            can't cd into it = dont have Execute permissions
+    cat /etc/passwd | grep garviel
+        garviel:x:1001:1001:Traitor:/home/garviel:/bin/bash
+            UserN:x:UID:GID:COMMENT:HOME DIR:DEFAULT SHELL
+    Sticky Bit
+        Prevents users other than Owner from deleting the file
+    
