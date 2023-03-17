@@ -1,0 +1,24 @@
+Windows Boot Process
+    BIOS vs UEFI
+        BIOS and UEFI do the same thing, but minor differences make UEFI more popular than BIOS in the current day.
+            UEFI Boots much faster than BIOS systems, especially for Windows machines.
+            UEFI Firmware is usually loaded into flash memory or EEPROM, making it easier to update and patch.=
+            UEFI offers SECURED BOOT mode which only allows verified drivers to load.
+            UEFI offers drive support of up to 9 zettabytes, while BIOS only works with 2 terabytes.
+
+    Windows Pre-boot process
+        POST
+            UEFI
+                winload.efi
+            BIOS
+                winload.exe
+    
+    Winlogon Process
+        System
+            SMSS.exe
+                smss.exe (session1)
+                
+    BCDEDIT
+        bcdedit /set {current} description "Windows 11 - Coffee Box"            changes the description to say "Windows 11 - Coffee Box"
+        bcdedit /delete {<section>} /f              deletes the section back to default
+        
