@@ -1,0 +1,58 @@
+ SystemD
+    garviel@terra
+ System5
+    bombadil@minas-tirith
+
+
+
+
+
+
+Linux Boot Process
+    BIOS
+        
+    MBR
+        First 512 bytes of HD
+        max of 4 partitions
+        
+    GRUB
+    KERNEL
+        Starts a process called init with a PID of 1
+        kernel is PID 0
+        Establish memory management, detects CPU type,page tables
+        mounts the root "/" filesystem
+    INIT
+        Looks at /etc/inittab
+        Available runlevels 0-6
+        Identifies default runlevel from /etc/inittab
+        entire startup process is handled by /etc/init.d
+        
+        Ctrl+F 6.Init for different run levels
+        
+        
+    RUNLEVELS
+    POST BOOT
+        /etc/environment
+        
+    
+    
+    
+Important Commands
+    lsblk
+    sudo xxd -l 512 -g 1 /dev/vda
+    sudo dd if=/dev/vda of=MBRCopy bs=1 count=512
+    cat /boot/grub/grub.cfg
+    sudo strace cat /etc/passwd
+    sudo lsmod
+    cat /etc/inittab
+    ls -l /etc/systemd/system
+    ls -l /lib/systemd/system
+    systemctl show -p <wants or  requires> graphical.target
+    
+    
+    
+    
+    
+    
+    
+    
