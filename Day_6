@@ -1,0 +1,66 @@
+echotrail.io
+
+
+
+Windows Processes
+    Process Validity
+        Being able to verify and destinguish a process from possible malicious processes
+        Malware will typically try to obuscate and hide themselves in places like:
+            registry keys
+            files
+            drivers
+    DLLs
+        Dynamically Linked Libraries
+        Used by different processes to draw information from the same location but use it for different processes
+        Cannot be directly executed
+        tasklist /m (Displays all modules and DLLs associated to processes)
+    Viewing Services / processes
+        gps
+        get-cminstance Win32_service
+        tasklist
+        Task Manager
+        sc query
+            C:\sc /?                           # Basic service enumeration
+            C:\sc qc                           # Configuration information for a service
+            C:\sc queryex eventlog             # Information for the eventlog service including pid
+            C:\sc qdescription eventlog        # Query eventlog service description
+            C:\sc qc eventlog                  # Show the binary command that loads the service
+            C:\sc showsid eventlog             # Displays the service SID and status
+            c:\sc enmudepend                   # Lists the services that cannot run unless the specified service is running
+        sc queryex type=service
+        net start (Views all currently running services)
+        System process run from System32
+        3rd party processes run from Programfiles
+
+    Scheculed Tasks
+        Can be used by the user or the system to schedule tasks to run repeatedly.
+        CAN BE USED BY ADVERSARIES FOR PERSISTENCE
+        Get-ScheduledTask | Select * | select -First 1
+            View all properties of the first scheduled task
+
+
+UAC
+    Red - Application or publisher blocked by group policy
+    Blue & gold - Administrative application
+    Blue - Trusted and Authenticode signed application
+    Yellow - Unsigned or signed but not trusted application
+    
+    Execution Levels
+        asInvoker
+            gets same permissions as the parent process
+        requireAdministrator
+            run with admin permissions if profile who started process was part of Administrators group
+        highestAvailable
+            highestAvailable priveleges that it can get
+
+Sysinternals        (USE THE FACILITATION GUIDE)
+    net use * http://live.sysinternals.com
+    
+    
+    
+    $wc.DownloadFile("https://download.sysinternals.com/files/SysinternalsSuite.zip","$pwd\SysinternalsSuite.zip")
+
+    .\sigcheck.exe -accepteula -m C:\Windows\System\slui.exe
+        sigcheck checks to see if a program is signe or not
+    strings -a C:\users\andy.dwyer\Desktop\<doc>.txt
+        Analyze windows files using strings
