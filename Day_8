@@ -1,0 +1,50 @@
+Windows Artifacts, Auditing, and Logging
+    Artifacts
+        Artifacts are objects or areas within a computer system that contain important information...
+        ...relevant to the activities performed on the system by the user
+    SID
+        Many Artifacts will require a SID to dig deeper into user specific locations
+        Commands to get SIDs
+            Get-LocalUser | select Name,SID
+            Get-WmiObject win32_useraccount | select name,sid
+            wmic UserAccount get name,sid
+            
+        SID demo in FG 2.2
+        
+    GUID
+        Located in HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count\ * they are encoded in ROT13
+        The GUID represents a particular file extension.
+        CEBFF5CD-ACE2-4F4F-9178-9926F41749EA A list of applications, files, links, and other objects that have been accessed
+        F4E57C4B-2036-45F0-A9AB-443BCFE33D9F Lists the Shortcut Links used to start programs
+    BAM
+        Show in Reg Edit:
+            HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings #On 1809 and Newer
+            HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\UserSettings #On 1803 and below
+    Recycle bin
+        SID - determines which user deleted it
+        Timestamp - When it was deleted
+        $RXXXXXX - content of deleted files         FOOT STOMP
+        $IXXXXXX - original PATH and name           FOOT STOMP
+        C:\$Recycle.bin (Hidden System Folder)
+    
+    Prefetch
+        Prefetch will prepare a command before you run it so it will retrieve results faster
+        PS C:\> Get-Childitem -Path 'C:\Windows\Prefetch' -ErrorAction Continue | select -First 8
+            This command prefetches the first 8 results from gci by using -path 'C:\Windows\Prefetch'
+    
+    Browser Artifacts
+        Areas of interest in Google Chrome History Files:
+            1. URLS
+            The urls table contains the basic browsing history for Chrome. This will include a single instance for all the URLs visited, a timestamp for the last time visited, and a counter for the number of times visited.
+            2. Current Session/Tabs
+            If you are examining a system that still has an active session available, Chrome will store the browsing activity here under current session and if there are multiple tabs open it will store it under current tabs.
+            3. Top Sites
+            Chrome shows the user their most frequently visited sites in panels on a homepage, which allows the user to quickly click on a frequently visited site. We recover the data around any URL that is listed as a “Top Site” in Chrome.
+    Event Logs
+        Application Logs- Logs about applications and processes
+        Security Logs- Logs pertaining to logins and users
+        System Logs- Anything relating to the system or drivers
+        
+        Get-eventlog
+        get-winevent
+        wevtutil (in command prompt)
