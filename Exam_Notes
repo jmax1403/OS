@@ -1,0 +1,58 @@
+Network traffic
+   netstat -ltup (Linux)   -anob (windows)
+    get-nettcpconnection (Powershell)
+        Look for strange network activity
+
+Sysinternals will not be downloaded. Go to FG to download.
+
+strings -a C:\users\andy.dwyer\Desktop\<doc>.txt
+        Analyze windows files using strings
+
+
+
+
+
+
+Process Enumeration
+    htop
+    ps -elf
+        look for high PID
+        look for processes with similar names to actual processes
+    systemctl <status> <PID>
+        only usable on SystemD systems
+    Get-process
+    tasklist
+        tasklist /m (Displays all modules and DLLs associated to processes)
+    task manager
+    get-ciminstance
+    Sysinternal tools
+    sc query
+    sudo ls -l /proc/<PID>
+Artifacts
+    Browser Artifacts
+    Recycle Bin
+         SID - determines which user deleted it
+        Timestamp - When it was deleted
+        $RXXXXXX - content of deleted files         FOOT STOMP
+        $IXXXXXX - original PATH and name           FOOT STOMP
+        C:\$Recycle.bin (Hidden System Folder)
+    BAM
+    Prefetch
+        results will be in ROT13. Take to cyberchef
+    Recent Files
+    
+Persistent Locations
+    Linux
+        Bash Profiles
+        Bashrc
+        /etc/inittab
+        Crontab / Cronjobs
+    Windows
+        schtasks /query
+        Get-ScheduledTasks
+            Get-ScheduledTask | Select * | select -First 1
+            View all properties of the first scheduled task
+        task scheduler
+        Autoruns (sysinternals)
+        Powershell Profiles (4 of them)
+        
